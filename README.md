@@ -20,4 +20,4 @@ This is my repo for STATS 220.
 - https://react.dev/
 
 
-Chiikawa![](https://tenor.com/en-NZ/view/chiikawa-chii-cute-pat-pat-pat-gif-17761293554813483554))
+Chiikawa ![](https://tenor.com/en-NZ/view/chiikawa-chii-cute-pat-pat-pat-gif-17761293554813483554))
