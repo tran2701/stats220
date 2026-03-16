@@ -12,7 +12,7 @@ This is my repo for STATS 220.
 **Top 3 things that I like**:
 1. Number 2
 2. Number 3
-3. Cats 🐈
+3. *Cats* 🐈
 
 **Websites that I go to a lot currently**
 - https://starrailstation.com/en/planner
@@ -20,5 +20,4 @@ This is my repo for STATS 220.
 - https://react.dev/
 
 
-Chiikawa
-![](https://tenor.com/en-NZ/view/chiikawa-chii-cute-pat-pat-pat-gif-17761293554813483554))
+Chiikawa![](https://tenor.com/en-NZ/view/chiikawa-chii-cute-pat-pat-pat-gif-17761293554813483554))
