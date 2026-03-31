@@ -65,11 +65,12 @@ avg_rep_per_muscle <- latest_data |>
 ## Bar Charts
 
 ```{r}
+##Chart of total count of muscle group targeted for each specific workout day 
 ggplot(latest_data, aes(x = split_day, fill = muscle_group)) +
   geom_bar(position = "dodge") +
   labs(
     title = "Muscle Groups Trained Against Workout Day",
-    subtitle = "Total count of every mucle group targeted over all workout day",
+    subtitle = "Total count of every mucle group targeted for each workout day over the whole split",
     x     = "Workout Day",
     y     = "Count",
     fill  = "Muscle Group"
@@ -78,6 +79,7 @@ ggplot(latest_data, aes(x = split_day, fill = muscle_group)) +
 ```
 
 ```{r}
+#Chart of average rep logged per muscle group
 avg_rep_per_muscle |>
   ggplot(aes(x = muscle_group, y = mean_reps)) +
   geom_bar(stat = "identity", fill = "seagreen") +
