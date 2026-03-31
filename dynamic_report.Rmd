@@ -52,7 +52,7 @@ mean_rep <- round(mean(latest_data$rep_count),2)
 avg_rep_per_muscle <- latest_data |>
   group_by(muscle_group) |>
   summarise(
-    mean_reps = round(mean(rep_count, na.rm = TRUE),
+    mean_reps = round(mean(rep_count, na.rm = TRUE),2),
     count     = n()
   )
 ```
