@@ -1,0 +1,97 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #333333;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+```
+
+## This dynamic reports tracks the average number of reps over all workout as well as the average number of reps recorded for each muscle group.
+
+The data is being recorded through Google Forms and each entry in the data records the workout split day, training phase (cut, bulk, or maintain),
+muscle group targeted, and total reps completed.
+
+
+```{r}
+library("tidyverse")
+
+#Reading the csv data
+logged_data <- read.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vTY4_5kwhVp13jYYKbmGPyy4wVaSVkgJ3Bx8jE5gjCBHx3DVrLGhzff1cSKfpCon2oi2u3LR3ROLfZb/pub?gid=1388521915&single=true&output=csv')
+
+#Renaming the columns of logged_data into shorter form
+latest_data <- rename(logged_data,
+                      "split_day" = 2,
+                      "training_phase" = 3,
+                      "muscle_group" = 4,
+                      "rep_count" = 5)
+
+```
+
+
+```{r}
+#Summary Stats Chunk
+
+#Average number of reps recorded through all workouts
+mean_rep <- round(mean(latest_data$rep_count),2)
+
+#Average rep recorded per muscle group
+avg_rep_per_muscle <- latest_data |>
+  group_by(muscle_group) |>
+  summarise(
+    mean_reps = mean(rep_count, na.rm = TRUE),
+    count     = n()
+  )
+```
+
+## Summary
+`r paste0("The average reps being recorded per workout is ", mean_rep, " reps")`
+
+`r paste0(avg_rep_per_muscle$muscle_group, ": ", round(avg_rep_per_muscle$mean_reps,1), " reps", collapse = ", ")`
+
+## Bar Charts
+
+```{r}
+#Chart of total count of muscle group targeted for each specific workout day 
+ggplot(latest_data, aes(x = split_day, fill = muscle_group)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Muscle Groups Trained Against Workout Day",
+    subtitle = "Total count of every mucle group targeted over all workout day",
+    x     = "Workout Day",
+    y     = "Count",
+    fill  = "Muscle Group"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+#Chart of average rep logged per muscle group
+avg_rep_per_muscle |>
+  ggplot(aes(x = muscle_group, y = mean_reps)) +
+  geom_bar(stat = "identity", fill = "seagreen") +
+  labs(
+    title = "Average Reps per Muscle Group",
+    subtitle = "The average reps recorded for each muscle group over the split",
+    x     = "Muscle Group",
+    y     = "Average Reps"
+  ) +
+  theme_minimal()
+```
+
+
+![](https://c.tenor.com/-qBsG1HwR4oAAAAC/tenor.gif)
